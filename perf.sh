@@ -53,9 +53,9 @@ elif [ "$1" == "--help" ]; then
 else
     echo "Usage: perf.sh [option]"
     echo "Options:"
-    echo "  -h    Set performance profile and GPU min frequency to 1100 MHz"
-    echo "  -m    Set power-saver profile and GPU min/max frequency to 550 MHz"
-    echo "  -l    Set power-saver profile and GPU min/max frequency to 300 MHz"
-    echo "  --help  Show this help message"
+    echo "  -h      (high)   Set performance profile and GPU min frequency to 1100 MHz"
+    echo "  -m      (medium) Set power-saver profile and GPU min/max frequency to 550 MHz"
+    echo "  -l      (low)    Set power-saver profile and GPU min/max frequency to 300 MHz"
+    echo "  --help           Show this help message"
     exit 1
 fi

@@ -9,7 +9,7 @@ This script requires `power-profiles-daemon` to be installed.
 ## Usage
 
 ```bash
-perf.sh [option]
+./perf.sh [option]
 ```
 
 ## Options

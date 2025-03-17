@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script requires root privileges."
+   sudo "$0" "$@"
+   exit 0
+fi
+
 
 ########################################################################################
 #                   __      _                                                          #

@@ -1,12 +1,5 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script requires root privileges."
-   sudo "$0" "$@"
-   exit 0
-fi
-
-
 ########################################################################################
 #                   __      _                                                          #
 #  _ __   ___ _ __ / _| ___| |__                                                       #
@@ -19,10 +12,26 @@ fi
 # Power-saver script to set system performance, designed for the Thinkpad T480         #
 # CPU: Intel(R) Core(TM) i5-8350U (8) @ 3.60 GHz                                       #
 # GPU: Intel UHD Graphics 620 @ 1.10 GHz                                               #
-#                                                                                      #
+#
 ########################################################################################
 
+HELP_MESSAGE="Usage: perf.sh [option]
+Options:
+  -h      (high)   Set performance profile and GPU min frequency to 1100 MHz
+  -m      (medium) Set power-saver profile and GPU min/max frequency to 550 MHz
+  -l      (low)    Set power-saver profile and GPU min/max frequency to 300 MHz
+  --help           Show this help message"
 
+if [ "$1" == "--help" ]; then
+    echo "$HELP_MESSAGE"
+    exit 0
+fi
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script requires root privileges."
+   sudo "$0" "$@"
+   exit 0
+fi
 
 if [ "$1" == "-h" ]; then
     powerprofilesctl set performance
@@ -41,21 +50,7 @@ elif [ "$1" == "-l" ]; then
     echo 300 > /sys/class/drm/card0/gt_max_freq_mhz
     echo "Power-saver mode (low) enabled"
     exit 0
-elif [ "$1" == "--help" ]; then
-    echo "Usage: perf.sh [option]"
-    echo "Options:"
-    echo "  -h    Set performance profile and GPU min frequency to 1100 MHz"
-    echo "  -m    Set power-saver profile and GPU min/max frequency to 550 MHz"
-    echo "  -l    Set power-saver profile and GPU min/max frequency to 300 MHz"
-    echo "  --help  Show this help message"
-    echo "Help message displayed"
-    exit 0
 else
-    echo "Usage: perf.sh [option]"
-    echo "Options:"
-    echo "  -h      (high)   Set performance profile and GPU min frequency to 1100 MHz"
-    echo "  -m      (medium) Set power-saver profile and GPU min/max frequency to 550 MHz"
-    echo "  -l      (low)    Set power-saver profile and GPU min/max frequency to 300 MHz"
-    echo "  --help           Show this help message"
+    echo "$HELP_MESSAGE"
     exit 1
 fi

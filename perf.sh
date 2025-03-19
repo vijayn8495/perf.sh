@@ -33,14 +33,14 @@ case "$1" in
         echo "$HELP_MESSAGE"
         exit 0
         ;;
-    "-h")
+    "-h"|"--high")
         powerprofilesctl set performance
         echo 1100 > /sys/class/drm/card0/gt_max_freq_mhz
         echo 1100 > /sys/class/drm/card0/gt_min_freq_mhz
         echo "Performance mode enabled"
         exit 0
         ;;
-    "-m")
+    "-m"|"--medium")
         powerprofilesctl set balanced
         echo "If a error shows up, don't worry, everything is fine."
         echo 550 > /sys/class/drm/card0/gt_max_freq_mhz
@@ -49,7 +49,7 @@ case "$1" in
         echo "Power-saver mode (medium) enabled"
         exit 0
         ;;
-    "-l")
+    "-l"|"--low")
         powerprofilesctl set power-saver
         echo 300 > /sys/class/drm/card0/gt_min_freq_mhz
         echo 300 > /sys/class/drm/card0/gt_max_freq_mhz

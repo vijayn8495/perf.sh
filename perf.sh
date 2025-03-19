@@ -40,6 +40,8 @@ if [ "$1" == "-h" ]; then
     exit 0
 elif [ "$1" == "-m" ]; then
     powerprofilesctl set balanced
+    echo "If a error shows up, don't worry, everything is fine."
+    echo 550 > /sys/class/drm/card0/gt_max_freq_mhz
     echo 550 > /sys/class/drm/card0/gt_min_freq_mhz
     echo 550 > /sys/class/drm/card0/gt_max_freq_mhz
     echo "Power-saver mode (medium) enabled"
